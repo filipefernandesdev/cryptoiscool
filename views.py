@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
 from binance.spot import Spot
+from datetime import datetime, timedelta
 # import requests # Import API
 views = Blueprint(__name__, "views")
 
@@ -32,7 +33,24 @@ def get_prices():
     # Price 24 hours (%)
     price24h = float((client.ticker_24hr(symbol))["priceChangePercent"])
 
-    # Price 2 weeks - Select only 2nd week
-    price2w = (client.klines(symbol, "1w", limit=2))[1]
+    # Price History - 2-week - daily
+    priceHistory = (client.klines(symbol, "1d", limit=14))
+    priceHistory_open = []
+    priceHistory_high = []
+    priceHistory_low = []
+    priceHistory_close = []
 
-    return render_template("prices.html", baseAsset=baseAsset, quoteAsset=quoteAsset, symbol=symbol, price=price, price24h=price24h, price2w=price2w)
+    for day in priceHistory:
+        priceHistory_open.append(float(day[1]))
+        priceHistory_high.append(float(day[2]))
+        priceHistory_low.append(float(day[3]))
+        priceHistory_close.append(float(day[4]))
+
+    # Date
+    dateList = []
+    for i in range(1, 15):
+        currentDate = datetime.today() - timedelta(days=i)
+        formattedDate = currentDate.strftime('%d-%m-%Y')
+        dateList.append(formattedDate)
+
+    return render_template("prices.html", baseAsset=baseAsset, quoteAsset=quoteAsset, symbol=symbol, price=price, price24h=price24h, priceHistory_open=priceHistory_open, priceHistory_high=priceHistory_high, priceHistory_low=priceHistory_low, priceHistory_close=priceHistory_close, dateList=dateList)

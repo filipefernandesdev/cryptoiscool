@@ -21,15 +21,24 @@
     
     <br><br>
 
-    <h2>Price 2 weeks</h2>
-    {% set open = price2w[1] | float %}
-    {% set high = price2w[2] | float %}
-    {% set low = price2w[3] | float %}
-    {% set close = price2w[4] | float %}
-
-    Open price: {{open}} {{quoteAsset}}<br>
-    High price: {{high}} {{quoteAsset}}<br>
-    Low price: {{low}} {{quoteAsset}}<br>
-    Close price: {{close}} {{quoteAsset}}
+    <h2>Price History (2 weeks)</h2>
+    <table>
+        <tr>
+            <td>Date</td>
+            <td>Open</td>
+            <td>High</td>
+            <td>Low</td>
+            <td>Close</td>
+        </tr>
+        {% for i in range(0, 14) %}
+        <tr>
+            <td>{{dateList[i]}}</td>
+            <td>{{priceHistory_open[i]}}</td>
+            <td>{{priceHistory_high[i]}}</td>
+            <td>{{priceHistory_low[i]}}</td>
+            <td>{{priceHistory_close[i]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
