@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request
 from binance.spot import Spot
-from newsapi import NewsApiClient
 from datetime import datetime, timedelta
 # import requests # Import API
 views = Blueprint(__name__, "views")
