@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    {% include "_head.html" %}
+    <title>CryptoIsCool</title>
+</head>
+<body>
+    {% include "_header.html" %}
+    {% include "_coinheader.html" %}
+
+    <h1>Current Prices</h1>
+    {% for i in range(5) %}
+        <a href="/crypto/{{baseAsset[i]}}?q={{quoteAsset}}">
+            <button>
+                <b>{{symbol[i]}}</b><br>
+                {{price[i]}} |
+                {% if price24h[i] > 0 %}
+                    <span style="color:green">{{price24h[i]}}%</span>
+                {% else %}
+                    <span style="color:red">{{price24h[i]}}%</span>
+                {% endif %}
+            </button>
+        </a>
+    {% endfor %}
+</body>
+</html>

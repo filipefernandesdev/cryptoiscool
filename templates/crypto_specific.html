@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "_head.html" %}
     <title>CryptoIsCool</title>
 </head>
 <body>
     {% include "_header.html" %}
+    {% include "_coinheader.html" %}
 
-    <h1>{{symbol}}</h1>
-
-    <h2>Current Price</h2>
-    1 {{baseAsset}} = {{price}} {{quoteAsset}}<br>
+    <h1>Current Price</h1>
+    <b>{{symbol}}</b><br>
+    {{price}} |
     {% if price24h > 0 %}
-        <span style="color:green">{{price24h}}%</span> (24h)
+        <span style="color:green">{{price24h}}%</span>
     {% else %}
-        <span style="color:red">{{price24h}}%</span> (24h)
+        <span style="color:red">{{price24h}}%</span>
     {% endif %}
-    
     <br><br>
-
+    
     <h2>Price History (2 weeks)</h2>
     <table>
         <tr>
@@ -39,6 +36,6 @@
             <td>{{priceHistory_close[i]}}</td>
         </tr>
         {% endfor %}
-    </table>
+    </table>   
 </body>
 </html>
