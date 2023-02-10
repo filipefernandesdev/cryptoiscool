@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request
 from binance.spot import Spot
 from datetime import datetime, timedelta
-# import requests # Import API
+import requests
+import json
 views = Blueprint(__name__, "views")
 
 
@@ -82,4 +83,28 @@ def get_specific_data(baseAsset):
         formattedDate = currentDate.strftime('%d-%m-%Y')
         dateList.append(formattedDate)
 
-    return render_template("crypto_specific.html", baseAsset=baseAsset, quoteAsset=quoteAsset, symbol=symbol, price=price, price24h=price24h, priceHistory_open=priceHistory_open, priceHistory_high=priceHistory_high, priceHistory_low=priceHistory_low, priceHistory_close=priceHistory_close, dateList=dateList)
+    # NewsAPI
+    newsapi_baseurl = "https://newsapi.org/v2/everything?language=en&searchIn=title"
+    newsapi_key = "a50b295bcc124951af8c25f798ef9303"
+
+    if baseAsset == "BTC":
+        newsapi_theme = "bitcoin"
+    elif baseAsset == "ETH":
+        newsapi_theme = "ethereum"
+    elif baseAsset == "BNB":
+        newsapi_theme = "'binance coin'"
+    else:
+        newsapi_theme = baseAsset
+
+    newsapi_sortby = "popularity"
+
+    newsapi_date = datetime.today() - timedelta(days=31)
+    newsapi_dateFormatted = newsapi_date.strftime('%Y-%m-%d')
+
+    newsapi_finalurl = newsapi_baseurl + "&from=" + newsapi_dateFormatted + \
+        "&sortby=" + newsapi_sortby + "&q=" + newsapi_theme + "&apikey=" + newsapi_key
+
+    newsapi_requestnews = requests.get(newsapi_finalurl)
+    newsapi_getnews = json.loads(newsapi_requestnews.content)
+
+    return render_template("crypto_specific.html", baseAsset=baseAsset, quoteAsset=quoteAsset, symbol=symbol, price=price, price24h=price24h, priceHistory_open=priceHistory_open, priceHistory_high=priceHistory_high, priceHistory_low=priceHistory_low, priceHistory_close=priceHistory_close, dateList=dateList, newsapi_getnews=newsapi_getnews)

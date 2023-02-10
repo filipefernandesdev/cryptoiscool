@@ -1,26 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
-<head>
-    {% include "_head.html" %}
-    <title>CryptoIsCool</title>
-</head>
-<body>
-    {% include "_header.html" %}
-    {% include "_coinheader.html" %}
-
-    <h1>Current Prices</h1>
-    {% for i in range(5) %}
-        <a href="/crypto/{{baseAsset[i]}}?q={{quoteAsset}}">
-            <button>
-                <b>{{symbol[i]}}</b><br>
-                {{price[i]}} |
-                {% if price24h[i] > 0 %}
-                    <span style="color:green">{{price24h[i]}}%</span>
-                {% else %}
-                    <span style="color:red">{{price24h[i]}}%</span>
-                {% endif %}
-            </button>
-        </a>
-    {% endfor %}
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
+        <!-- Bootstrap -->
+        <link href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Style -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
+        <title>Market | CryptoIsCool</title>
+    </head>
+    <body>
+        {% include "_header.html" %}
+        <div class="container">
+            <h2 class="text-center fw-bold mt-5 mb-3">Current Prices</h2>
+            <div class="row cryptomarket">
+                {% for i in range(5) %}
+                    <div class="col mb-3">
+                        <a href="/crypto/{{baseAsset[i]}}?q={{quoteAsset}}" class="text-reset text-decoration-none">
+                            <div class="card p-5 cryptomarket-card" style="background: #222">
+                                <h2 class="fw-bold text-center">{{baseAsset[i]}}</h2>
+                                <p class="text-center">{{price[i]}}€</p>
+                                {% if price24h[i] > 0 %}
+                                    <p class="text-center" style="color: green">{{price24h[i]}}%</p>
+                                {% else %}
+                                    <p class="text-center" style="color: red">{{price24h[i]}}%</p>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+    <!-- Bootstrap JS Files -->
+    <script src="{{ url_for('static', filename='scripts/bootstrap/bootstrap.bundle.min.js') }}"></script>
 </html>

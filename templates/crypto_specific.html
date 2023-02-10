@@ -1,41 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
-<head>
-    {% include "_head.html" %}
-    <title>CryptoIsCool</title>
-</head>
-<body>
-    {% include "_header.html" %}
-    {% include "_coinheader.html" %}
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
+        <!-- Bootstrap -->
+        <link href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Style -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <title>{{baseAsset}} | CryptoIsCool</title>
+    </head>
+    <body>
+        {% include "_header.html" %}
+        <div class="container">
+            <div class="px-4 pt-5 my-5 text-center border-bottom">
+                <h1 class="display-4 fw-bold">{{baseAsset}}</h1>
+                <div class="col-lg-6 mx-auto">
+                    <p class="lead mb-4">
+                        {{price}}€ | {% if price24h > 0 %}
+                        <span style="color: green">{{price24h}}%</span>
+                        {% else %}
+                        <span style="color: red">{{price24h}}%</span>
+                        {% endif %}
+                    </p>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#pricehistory">View Price History (2 weeks)</a>
+                        <a class="btn btn-outline-primary btn-lg px-4" href="#viewnews">View News</a>
+                    </div>
+                </div>
+                <div class="overflow-hidden" style="max-height: 30vh">
+                    <div class="container px-5">
+                        <img src="https://datavizcatalogue.com/methods/images/top_images/SVG/OHLC_chart.svg" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
+                    </div>
+                </div>
+            </div>
 
-    <h1>Current Price</h1>
-    <b>{{symbol}}</b><br>
-    {{price}} |
-    {% if price24h > 0 %}
-        <span style="color:green">{{price24h}}%</span>
-    {% else %}
-        <span style="color:red">{{price24h}}%</span>
-    {% endif %}
-    <br><br>
-    
-    <h2>Price History (2 weeks)</h2>
-    <table>
-        <tr>
-            <td>Date</td>
-            <td>Open</td>
-            <td>High</td>
-            <td>Low</td>
-            <td>Close</td>
-        </tr>
-        {% for i in range(0, 14) %}
-        <tr>
-            <td>{{dateList[i]}}</td>
-            <td>{{priceHistory_open[i]}}</td>
-            <td>{{priceHistory_high[i]}}</td>
-            <td>{{priceHistory_low[i]}}</td>
-            <td>{{priceHistory_close[i]}}</td>
-        </tr>
-        {% endfor %}
-    </table>   
-</body>
+            <br>
+
+            <!-- Price History -->
+            <h2 id="pricehistory" class="text-center fw-bold mt-5 mb-3">Price History (2 weeks)</h2>
+            <table class="table" style="color: #fff;">
+                <tr>
+                    <th>Date</th>
+                    <th>Open</th>
+                    <th>High</th>
+                    <th>Low</th>
+                    <th>Close</th>
+                </tr>
+                {% for i in range(0, 14) %}
+                <tr>
+                    <th>{{dateList[i]}}</th>
+                    <td>{{priceHistory_open[i]}}</td>
+                    <td>{{priceHistory_high[i]}}</td>
+                    <td>{{priceHistory_low[i]}}</td>
+                    <td>{{priceHistory_close[i]}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <br>
+
+            <!-- News -->
+            <h2 id="viewnews" class="text-center fw-bold mt-5 mb-3">News</h2>
+            <div class="row cryptomarket">
+                {% for i in range(6) %}
+                    <div class="col mb-3">
+                        <a href='{{ newsapi_getnews["articles"][i]["url"] }}' class="text-reset text-decoration-none" target="_blank">
+                            <div class="col">
+                                <img src='{{ newsapi_getnews["articles"][i]["urlToImage"] }}' style="max-width:100%; border-radius: 5px;" alt="">
+                                <h6>{{ newsapi_getnews["articles"][i]["title"] }}</h6>
+                            </div>                            
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+    <!-- Bootstrap JS Files -->
+    <script src="{{ url_for('static', filename='scripts/bootstrap/bootstrap.bundle.min.js') }}"></script>
 </html>

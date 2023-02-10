@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
-<head>
-    {% include "_head.html" %}
-    <title>CryptoIsCool</title>
-</head>
-<body>
-    {% include "_header.html" %}
-    <main>
-        <section>
-            <h1>CryptoIsCool</h1>
-            <p>The best place to analyze<br>cryptocurrency data</p>
-            <a href="./crypto"><button>View Market</button></a>
-        </section>
-    </main>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
+        <!-- Bootstrap -->
+        <link href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Style -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <title>Página Inicial | CryptoIsCool</title>
+    </head>
+    <body>
+        {% include "_header.html" %}
+        <main>
+            <div class="container col-xxl-8 px-4 py-5">
+                <div class="row cryptoindex flex-lg-row-reverse align-items-center g-5 py-5">
+                    <div class="col-10 col-sm-8 col-lg-6">
+                        <img src="{{url_for('static', filename='./assets/img/indeximg.webp')}}" class="d-block mx-lg-auto img-fluid" alt="CryptoIsCool" width="700" height="500" loading="lazy">
+                    </div>
+                    <div class="col-lg-6">
+                        <h1 class="display-5 fw-bold lh-1 mb-3">CryptoIsCool</h1>
+                        <p class="lead">The best place to analyze<br />cryptocurrency data</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <a class="btn btn-primary btn-lg px-4 me-md-2" href="./crypto">View Market</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+    <!-- Bootstrap JS Files -->
+    <script src="{{ url_for('static', filename='scripts/bootstrap/bootstrap.bundle.min.js') }}"></script>
 </html>
