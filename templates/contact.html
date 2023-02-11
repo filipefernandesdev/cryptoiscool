@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
+        <!-- Bootstrap -->
+        <link href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Style -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
+        <link rel="shortcut icon" href="{{url_for('static', filename='./assets/favicon.ico')}}" type="image/x-icon">
+        <title>Contact Us | CryptoIsCool</title>
+    </head>
+    <body>
+        {% include "_header.html" %}
+        <div class="container text-center">
+            <h2 class="text-center fw-bold mt-5 mb-3">Contact Us</h2>
+            If have any questions please contact us using the following email:
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg> cryptoiscool.business@gmail.com</p>
+            <img src="{{url_for('static', filename='./assets/img/indeximg.webp')}}" class="d-block mx-lg-auto img-fluid" alt="CryptoIsCool" width="500" height="500" loading="lazy">
+        </div>
+    </body>
+    <!-- Bootstrap JS Files -->
+    <script src="{{ url_for('static', filename='scripts/bootstrap/bootstrap.bundle.min.js') }}"></script>
+</html>

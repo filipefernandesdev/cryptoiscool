@@ -12,6 +12,7 @@
         <link href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
         <!-- Style -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="shortcut icon" href="{{url_for('static', filename='./assets/favicon.ico')}}" type="image/x-icon">
         <title>{{baseAsset}} | CryptoIsCool</title>
     </head>
     <body>
@@ -72,7 +73,7 @@
                         <a href='{{ newsapi_getnews["articles"][i]["url"] }}' class="text-reset text-decoration-none" target="_blank">
                             <div class="col">
                                 <img src='{{ newsapi_getnews["articles"][i]["urlToImage"] }}' style="max-width:100%; border-radius: 5px;" alt="">
-                                <h6>{{ newsapi_getnews["articles"][i]["title"] }}</h6>
+                                <h6 class="mt-1">{{ newsapi_getnews["articles"][i]["title"] }}</h6>
                             </div>                            
                         </a>
                     </div>

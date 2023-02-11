@@ -108,3 +108,13 @@ def get_specific_data(baseAsset):
     newsapi_getnews = json.loads(newsapi_requestnews.content)
 
     return render_template("crypto_specific.html", baseAsset=baseAsset, quoteAsset=quoteAsset, symbol=symbol, price=price, price24h=price24h, priceHistory_open=priceHistory_open, priceHistory_high=priceHistory_high, priceHistory_low=priceHistory_low, priceHistory_close=priceHistory_close, dateList=dateList, newsapi_getnews=newsapi_getnews)
+
+
+@views.route("/about")
+def about():
+    return render_template("about.html")
+
+
+@views.route("/contact")
+def contact():
+    return render_template("contact.html")
